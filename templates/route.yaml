@@ -1,19 +1,19 @@
-{{- range .Values.apps }}
+{{- range $name, $app := .Values.apps }}
 ---
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: {{ .name }}-prod
+  name: {{ $name }}-prod
   labels:
-    app: {{ .name }}
+    app: {{ $name }}
     tier: prod
 spec:
-  host: {{ .name }}-{{ $.Values.guid }}.{{ $.Values.domain }}
+  host: {{ $name }}-{{ $.Values.guid }}.{{ $.Values.domain }}
   to:
     kind: Service
-    name: {{ .name }}-prod
+    name: {{ $name }}-prod
   port:
-    targetPort: {{ .port }}
+    targetPort: {{ $app.port }}
   tls:
     termination: edge
     insecureEdgeTerminationPolicy: Redirect

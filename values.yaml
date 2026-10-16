@@ -1,14 +1,16 @@
 guid: ""
 domain: ""
-imageTag: "latest"
 
 apps:
-  - name: report-generator-app
+  report-generator-app:
     port: 8080
     path: /
-  - name: wire-transfer-svc
+    imageTag: "latest"
+  wire-transfer-svc:
     port: 8080
     path: /
-  - name: benefits-mgmt-app
+    imageTag: "latest"
+  benefits-mgmt-app:
     port: 8080
     path: /
+    imageTag: "latest"

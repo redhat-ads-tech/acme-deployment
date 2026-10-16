@@ -1,17 +1,17 @@
-{{- range .Values.apps }}
+{{- range $name, $app := .Values.apps }}
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .name }}-prod
+  name: {{ $name }}-prod
   labels:
-    app: {{ .name }}
+    app: {{ $name }}
     tier: prod
 spec:
   selector:
-    app: {{ .name }}
+    app: {{ $name }}
     tier: prod
   ports:
-    - port: {{ .port }}
-      targetPort: {{ .port }}
+    - port: {{ $app.port }}
+      targetPort: {{ $app.port }}
 {{- end }}
