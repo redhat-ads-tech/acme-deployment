@@ -1,0 +1,5 @@
+apiVersion: v2
+name: acme-apps
+description: Acme sample application deployments for Lightwell workshop
+version: 1.0.0
+type: application

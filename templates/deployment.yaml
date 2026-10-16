@@ -1,0 +1,39 @@
+{{- range .Values.apps }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .name }}-prod
+  labels:
+    app: {{ .name }}
+    tier: prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .name }}
+      tier: prod
+  template:
+    metadata:
+      labels:
+        app: {{ .name }}
+        tier: prod
+    spec:
+      containers:
+        - name: {{ .name }}
+          image: nexus-oci-{{ $.Values.guid }}.{{ $.Values.domain }}/oci/{{ .name }}:{{ $.Values.imageTag }}
+          ports:
+            - containerPort: {{ .port }}
+          readinessProbe:
+            httpGet:
+              path: {{ .path }}
+              port: {{ .port }}
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              memory: 512Mi
+{{- end }}
