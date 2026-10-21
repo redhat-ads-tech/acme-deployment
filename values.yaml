@@ -3,14 +3,17 @@ domain: ""
 
 apps:
   report-generator-app:
+    runtime: spring-boot
     port: 8080
     path: /springboot2-migration/actuator/health
     imageTag: "latest"
   wire-transfer-svc:
+    runtime: tomcat
     port: 8080
     path: /listAccounts.do
     imageTag: "latest"
   benefits-mgmt-app:
+    runtime: tomcat
     port: 8080
     path: /
     imageTag: "latest"
